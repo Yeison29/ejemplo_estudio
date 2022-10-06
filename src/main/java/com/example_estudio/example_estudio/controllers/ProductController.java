@@ -69,4 +69,13 @@ public class ProductController {
             return ResponseEntity.notFound().build();
         }
     }
+    @GetMapping(value = "/products/typo/{typo}")
+    public ResponseEntity listTypoProducts(@PathVariable String typo){
+        List<Products> productsDB = productRepository.findAllByTypo(typo);
+        if(productsDB.isEmpty()){
+            return ResponseEntity.notFound().build();
+        }else{
+            return new ResponseEntity(productsDB,HttpStatus.OK);
+        }
+    }
 }
